@@ -5,6 +5,7 @@ import { CategoriesFormComponent } from './categories-page/categories-form/categ
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { OrderPositionsFormComponent } from './order-page/order-forms/order-positions-form/order-positions-form.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
       {path: 'analitycs', component: AnalyticsPageComponent},
       {path: 'history', component: HistoryPageComponent},
       {path: 'newOrder', component: OrderPageComponent},
+      {path: 'newOrder/add-from-category/:id', component: OrderPositionsFormComponent},
       {path: 'categories', component: CategoriesPageComponent},
       {path: 'categories/new', component: CategoriesFormComponent},
       {path: 'categories/:id', component: CategoriesFormComponent}

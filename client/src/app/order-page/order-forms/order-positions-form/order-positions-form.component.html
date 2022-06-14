@@ -1,0 +1,45 @@
+<div class="page-title">
+    <h4>
+        <a routerLink="/newOrder">Сформировать заказ</a>
+        <i class="material-icons">keyboard_arrow_right</i>
+        Добавить продукцию
+    </h4>
+    <button class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
+        Завершить
+    </button>
+</div>
+
+<div *ngIf="!loading else loader">
+    <table class="highlight" *ngIf="positions.length !== 0; else empty">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Стоимость</th>
+            <th>Количество</th>
+            <th></th>
+        </tr>
+        </thead>
+    
+        <tbody>
+        <tr *ngFor="let position of positions">
+            <td>{{position.name}}</td>
+            <td>{{position.cost}} руб.</td>
+            <td>
+                <div class="input-field inline order-position-input">
+                    <input type="number" value="1" min="1">
+                </div>
+            </td>
+            <td>
+                <button class="btn waves-effect wavers-light btn-small">Добавить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #empty>
+    <div class="center">В данной категории нет позиций</div>
+</ng-template>
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

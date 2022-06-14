@@ -42,7 +42,8 @@ export class CategoriesFormComponent implements OnInit {
 			}
 		)
 	).subscribe(
-		(category: Category) => {
+		{
+			next: (category: Category) => {
 			if (category) {
 				this.category = category
 				//console.log(category._id)
@@ -53,8 +54,8 @@ export class CategoriesFormComponent implements OnInit {
 				MaterialService.updateTextInputs()
 			}
 			this.form.enable()
-		},
-		error => MaterialService.toast(error.error.message)
+			},
+		error: error => MaterialService.toast(error.error.message)}
 	)
   	}
 

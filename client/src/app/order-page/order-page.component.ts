@@ -9,16 +9,12 @@ import { CategoriesService } from '../shared/services/categories.service';
   styleUrls: ['./order-page.component.css']
 })
 
-export class OrderPageComponent implements OnInit, AfterViewInit {
+export class OrderPageComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService) { }
-  categories$: Observable<Category[]>
+  categories: Observable<Category[]>
 
 	ngOnInit(): void {
-		this.categories$ = this.categoriesService.fetch()
-  	}
-	ngAfterViewInit(): void {
-		
-	}
-
+		this.categories = this.categoriesService.fetch()
+  }
 }
