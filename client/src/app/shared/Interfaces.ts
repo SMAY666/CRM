@@ -26,10 +26,11 @@ export interface Position {
 export interface Order {
     date: Date
     order: number
-    list: [
-        name: string,
-        quantity: number,
-        cost:number
-    ]
+    list:
+        {
+            name: string,
+            quantity: number,
+            cost:number
+        }[]
     user: Schema.Types.ObjectId
 }

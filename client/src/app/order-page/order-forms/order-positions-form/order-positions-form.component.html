@@ -21,16 +21,24 @@
         </thead>
     
         <tbody>
-        <tr *ngFor="let position of positions">
+        <tr *ngFor="let position of positions; let i = index">
             <td>{{position.name}}</td>
             <td>{{position.cost}} руб.</td>
             <td>
                 <div class="input-field inline order-position-input">
-                    <input type="number" value="1" min="1">
+                    <form [formGroup]="forms[i]">
+                        <input formControlName="number" type="number"
+                        [ngClass]="{'invalid': forms[i].get('number').invalid && forms[i].get('number').touched}">
+                    </form>
+                    <span class="helper-text red-text" *ngIf="forms[i].get('number').invalid && forms[i].get('number').touched">
+                        Значение не должно быть меньше еденицы
+                    </span>
                 </div>
             </td>
             <td>
-                <button class="btn waves-effect wavers-light btn-small">Добавить</button>
+                <button class="btn waves-effect wavers-light btn-small" type="submit"
+                [disabled]="forms[i].disabled || forms[i].invalid"
+                >Добавить</button>
             </td>
         </tr>
         </tbody>
