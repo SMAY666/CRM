@@ -6,7 +6,6 @@ import { switchMap } from 'rxjs/operators'
 import { of } from 'rxjs';
 import { MaterialService } from 'src/app/shared/services/material.service';
 import { Category } from 'src/app/shared/Interfaces';
-import { NodeWithI18n } from '@angular/compiler';
 
 @Component({
   selector: 'app-categories-form',
@@ -21,7 +20,7 @@ export class CategoriesFormComponent implements OnInit {
   	isNew = true
 
 	category: Category
-	
+
   	constructor(private route: ActivatedRoute, private categoriesService: CategoriesService, private router: Router) { }
 
   	ngOnInit(): void {
@@ -35,7 +34,6 @@ export class CategoriesFormComponent implements OnInit {
 			(params: Params) => {
 				if (params['id']) {
 					this.isNew = false
-					console.log(`Найдена категория ${this.categoriesService.getById(params['id'])} on swithMap`)
 					return this.categoriesService.getById(params['id'])
 				}
 				return of(null)
@@ -46,7 +44,6 @@ export class CategoriesFormComponent implements OnInit {
 			next: (category: Category) => {
 			if (category) {
 				this.category = category
-				//console.log(category._id)
 				this.form.patchValue({
 					name: category.name
 				})
@@ -97,7 +94,7 @@ export class CategoriesFormComponent implements OnInit {
 			console.log(`Ты передаешь категорию с идентификатором ${this.category._id}`)
 			obs$ = this.categoriesService.update(this.category._id, this.form.value.name, this.image)
 		}
-		
+
 		obs$.subscribe(
 			category => {
 				this.category = category

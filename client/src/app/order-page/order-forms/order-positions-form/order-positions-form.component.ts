@@ -3,9 +3,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params} from '@angular/router';
 import {switchMap} from 'rxjs';
 
-import {OrderPositions, Position} from 'src/app/shared/Interfaces';
+import {Position} from 'src/app/shared/Interfaces';
 import {MaterialService} from 'src/app/shared/services/material.service';
 import {PositionsService} from 'src/app/shared/services/positions.service';
+import {OrderPageComponent} from '../../order-page.component';
 
 
 @Component({
@@ -17,7 +18,6 @@ export class OrderPositionsFormComponent implements OnInit {
     positions: Position[] = []
     loading = true
     forms: FormGroup[] = []
-    orderPositions: OrderPositions[] = []
 
     constructor(
         private rout: ActivatedRoute,
@@ -51,11 +51,11 @@ export class OrderPositionsFormComponent implements OnInit {
     }
 
     addToList(position: Position, form: FormGroup) {
-        this.orderPositions.push({
+        OrderPageComponent.orderPositions.push({
             name: position.name,
             quantity: form.value,
             cost: position.cost
         })
-        console.log(this.orderPositions)
+        console.log(OrderPageComponent.orderPositions)
     }
 }
