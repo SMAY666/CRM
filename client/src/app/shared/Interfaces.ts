@@ -1,36 +1,35 @@
-import { Schema } from "mongoose"
-
-export interface User {
+export type User = {
     email: string
     password: string
 }
 
-export interface Message {
+export type Message = {
     message: string
 }
 
-export interface Category {
+export type Category = {
     name: string
     imageSrc?: string
     user?: string
-    _id?: string   
+    _id?: string
 }
 
-export interface Position {
+export type Position = {
     name: string
     cost: number
     user?: string
     category: string
     _id?: string
 }
-export interface Order {
+
+export type OrderPositions = {
+    name: string,
+    quantity: number,
+    cost: number
+}
+
+export type Order = {
     date: Date
     order: number
-    list:
-        {
-            name: string,
-            quantity: number,
-            cost:number
-        }[]
-    user: Schema.Types.ObjectId
+    list: OrderPositions[]
 }

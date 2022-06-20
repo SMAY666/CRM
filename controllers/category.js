@@ -25,7 +25,7 @@ module.exports.getById = async function(req, res) {
 module.exports.remove = async function(req, res) {
     try {
         await Category.remove({_id: req.params.id})
-        await Position.remove({Category: req.params.id})
+        await Position.remove({category: req.params.id})
         res.status(200).json({
             message: 'Категория удалена'
         })
@@ -69,8 +69,7 @@ module.exports.update = async function(req, res) {
             {new: true}
         )
         res.status(200).json(category)
-        //console.log(req.params)
-        console.log(`id категории, которая была изменена ${category.id}`)
+        //console.log(req.params
     }
     catch(e) {
         errorHendler(res, e)

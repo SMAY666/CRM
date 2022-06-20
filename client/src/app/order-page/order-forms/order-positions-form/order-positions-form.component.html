@@ -19,7 +19,7 @@
             <th></th>
         </tr>
         </thead>
-    
+
         <tbody>
         <tr *ngFor="let position of positions; let i = index">
             <td>{{position.name}}</td>
@@ -37,7 +37,8 @@
             </td>
             <td>
                 <button class="btn waves-effect wavers-light btn-small" type="submit"
-                [disabled]="forms[i].disabled || forms[i].invalid"
+                    [disabled]="forms[i].disabled || forms[i].invalid"
+                    (click)="addToList(position, forms[i])"
                 >Добавить</button>
             </td>
         </tr>

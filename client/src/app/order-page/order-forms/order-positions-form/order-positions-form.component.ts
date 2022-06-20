@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params} from '@angular/router';
 import {switchMap} from 'rxjs';
 
-import {Position} from 'src/app/shared/Interfaces';
+import {OrderPositions, Position} from 'src/app/shared/Interfaces';
 import {MaterialService} from 'src/app/shared/services/material.service';
 import {PositionsService} from 'src/app/shared/services/positions.service';
 
@@ -14,15 +14,16 @@ import {PositionsService} from 'src/app/shared/services/positions.service';
     styleUrls: ['./order-positions-form.component.css']
 })
 export class OrderPositionsFormComponent implements OnInit {
+    positions: Position[] = []
+    loading = true
+    forms: FormGroup[] = []
+    orderPositions: OrderPositions[] = []
+
     constructor(
         private rout: ActivatedRoute,
         private positionsService: PositionsService
     ) {
     }
-
-    positions: Position[] = []
-    loading = true
-    forms: FormGroup[] = []
 
     ngOnInit(): void {
         this.rout.params
@@ -34,7 +35,7 @@ export class OrderPositionsFormComponent implements OnInit {
                 )
             )
             .subscribe({
-                next: positions => {
+                next: (positions) => {
                     this.positions = positions
 
                     for (let i = 0; i < this.positions.length; i++) {
@@ -47,5 +48,14 @@ export class OrderPositionsFormComponent implements OnInit {
                 },
                 error: error => MaterialService.toast(error.error.message)
             })
+    }
+
+    addToList(position: Position, form: FormGroup) {
+        this.orderPositions.push({
+            name: position.name,
+            quantity: form.value,
+            cost: position.cost
+        })
+        console.log(this.orderPositions)
     }
 }
