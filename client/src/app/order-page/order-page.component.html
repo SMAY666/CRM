@@ -4,28 +4,29 @@
         Завершить
     </button>
 </div>
-
-<div class="center" *ngIf="categories | async as categories; else loader">
-    <div class="frow order-row" *ngIf="categories.length !== 0; else empty">
-        <div [routerLink]="['/newOrder/add-from-category/', category._id]" class="card waves-effect pointer"
-             *ngFor="let category of categories">
-            <div class="center">
-                <img src="{{category.imageSrc}}" class="responsive-img order-img" alt="">
-            </div>
-            <div class="card-content center p10">
-                <h5 class="m0">{{category.name}}</h5>
+<div class="main">
+    <div class="center" *ngIf="categories | async as categories; else loader">
+        <div class="frow order-row" *ngIf="categories.length !== 0; else empty">
+            <div [routerLink]="['/newOrder/add-from-category/', category._id]" class="card waves-effect pointer"
+                 *ngFor="let category of categories">
+                <div class="center">
+                    <img src="{{category.imageSrc}}" class="responsive-img order-img" alt="">
+                </div>
+                <div class="card-content center p10">
+                    <h5 class="m0">{{category.name}}</h5>
+                </div>
             </div>
         </div>
     </div>
+    <h4 id="youOrder">Ваш заказ</h4>
+    <div id="checkList" class="frow order-row">
+        <app-order-checklist-form></app-order-checklist-form>
+    </div>
 </div>
-<footer class="frow order-row">
-    <app-order-checklist></app-order-checklist>
-</footer>
 
 <ng-template #loader>
     <app-loader></app-loader>
 </ng-template>
 <ng-template #empty>
-    <div>Категории не найдены. Вы можете добавить категории в разделе <a routerLink="/categories">"Ассортимент"</a>
-    </div>
+    <div>Категории не найдены. Вы можете добавить категории в разделе <a routerLink="/categories">"Ассортимент"</a></div>
 </ng-template>

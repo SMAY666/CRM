@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-order-checklist',
+  selector: 'app-order-checklist-form',
   templateUrl: './order-checklist.component.html',
   styleUrls: ['./order-checklist.component.css']
 })
