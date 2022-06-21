@@ -40,7 +40,7 @@ export class OrderPositionsFormComponent implements OnInit {
 
                     for (let i = 0; i < this.positions.length; i++) {
                         this.forms.push(new FormGroup({
-                            number: new FormControl(1, [Validators.required, Validators.min(1)])
+                            number: new FormControl(1, [Validators.required, Validators.min(1), Validators.pattern("^[0-9]*[.,]?")])
                         }))
                     }
 
@@ -53,9 +53,17 @@ export class OrderPositionsFormComponent implements OnInit {
     addToList(position: Position, form: FormGroup) {
         OrderPageComponent.orderPositions.push({
             name: position.name,
-            quantity: form.value,
+            quantity: form.value.number,
             cost: position.cost
         })
         console.log(OrderPageComponent.orderPositions)
+    }
+    onSubmit(position: Position, form: FormGroup): void {
+        try {
+            this.addToList(position, form)
+            MaterialService.toast(`Позиция "${position.name}" добавлена в список заказаа в количестве ${form.value.number}`)
+        } catch (error) {
+            console.warn(error)
+        }
     }
 }

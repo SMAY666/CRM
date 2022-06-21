@@ -84,14 +84,11 @@ export class CategoriesFormComponent implements OnInit {
 	}
 
   	onSubmit(): void {
-		console.log(`isNew ${this.isNew} on submit`)
 		let obs$
 		this.form.disable()
 		if (this.isNew) {
-			console.log("Попал в криэйт")
 			obs$ =this.categoriesService.create(this.form.value.name, this.image)
 		} else {
-			console.log(`Ты передаешь категорию с идентификатором ${this.category._id}`)
 			obs$ = this.categoriesService.update(this.category._id, this.form.value.name, this.image)
 		}
 

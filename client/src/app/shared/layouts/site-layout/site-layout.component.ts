@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MaterialService } from '../../services/material.service';
+import {OrderPageComponent} from '../../../order-page/order-page.component';
 
 @Component({
   selector: 'app-site-layout',
@@ -12,7 +13,7 @@ export class SiteLayoutComponent implements AfterViewInit {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  @ViewChild('floating') floatingRef: ElementRef 
+  @ViewChild('floating') floatingRef: ElementRef
   links = [
     {url: '/overview', name: 'Обзор'},
     {url: '/analitycs', name: 'Аналитика'},
@@ -29,5 +30,17 @@ ngAfterViewInit(): void {
     this.auth.logOut()
     this.router.navigate(['/login'])
   }
+    deleteCurrentOrderPositions(url: string): void {
+      if (url !== '/newOrder') {
+          if (OrderPageComponent.orderPositions.length > 0) {
+              const decision = window.confirm(`Если вы покините данный раздел, все выбранные вами позиции (${OrderPageComponent.orderPositions.length}) будут удалены из списка заказов. Продолжить?`)
+              if (decision) {
+                  OrderPageComponent.orderPositions = [];
+              } else {
+                  this.router.navigate(['/newOrder'])
+              }
+          }
+      }
+    }
 
 }

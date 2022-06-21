@@ -1,11 +1,12 @@
 <ul class="sidenav sidenav-fixed a-sidenav">
     <h4>CRM Service</h4>
-    <li *ngFor="let link of links" class="bold" routerLinkActive="active"><a [routerLink]="[link.url]" class="waves-effect waves-orange">{{link.name}}</a></li>
-    
+    <li *ngFor="let link of links" (click)="deleteCurrentOrderPositions(link.url)" class="bold" routerLinkActive="active"><a [routerLink]="[link.url]" class="waves-effect waves-orange">{{link.name}}</a>
+    </li>
+
     <li class="bold last"><a href="#" class="waves-effect waves-orange" (click)="logOut($event)">Выйти</a></li>
 </ul>
 <main class="content">
-    <router-outlet></router-outlet>   
+    <router-outlet></router-outlet>
 </main>
 
 <div class="fixed-action-btn" #floating>

@@ -22,6 +22,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        console.log("Вызван метод ngOnDestroy()")
+
     }
 }
