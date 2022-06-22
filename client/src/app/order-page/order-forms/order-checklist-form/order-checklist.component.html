@@ -1,1 +1,37 @@
-<h5 class="frow order-row">Позиции</h5>
+<div class="main">
+    <div id="child">
+        <table class="highlight" *ngIf="selectedPos.length !== 0; else empty">
+            <tbody>
+            <tr *ngFor="let position of selectedPos; let i = index">
+                <td>{{position.name}}</td>
+                <td>{{position.quantity}} руб.</td>
+                <td>
+                    <div class="input-field inline order-position-input">
+                        <form [formGroup]="forms[i]">
+                            <input formControlName="number" type="number"
+                                   [ngClass]="{'invalid': forms[i].get('number').invalid && forms[i].get('number').touched}">
+                        </form>
+                        <span class="helper-text red-text"
+                              *ngIf="forms[i].get('number').invalid && forms[i].get('number').touched">
+                        <span *ngIf="forms[i].get('number').errors['required']">Поле не должжно быть пустым</span>
+                        <span *ngIf="forms[i].get('number').errors['pattern']">Число должно быть целым</span>
+                        <span *ngIf="forms[i].get('number').errors['min']">Минимальное значение поля: 1</span>
+                    </span>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn waves-effect wavers-light btn-small"
+                            type="submit"
+                            [disabled]="forms[i].disabled || forms[i].invalid"
+                    >Добавить
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #empty>
+        В списке нет товаров
+    </ng-template>
+</div>

@@ -1,0 +1,8 @@
+#child {
+    direction: ltr;
+    width: 100%;
+}
+
+td {
+    padding-right: 150px;
+}
