@@ -4,7 +4,8 @@ import {OrderPageComponent} from '../../order-page.component';
 
 @Inject({
 
-})
+    }
+)
 @Component({
   selector: 'app-order-checklist-form',
   templateUrl: './order-checklist.component.html',

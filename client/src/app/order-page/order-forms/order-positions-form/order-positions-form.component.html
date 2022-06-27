@@ -15,33 +15,16 @@
         <tr>
             <th>Название</th>
             <th>Стоимость</th>
-            <th>Количество</th>
-            <th></th>
         </tr>
         </thead>
 
         <tbody>
-        <tr *ngFor="let position of positions; let i = index">
+        <tr *ngFor="let position of positions">
             <td>{{position.name}}</td>
             <td>{{position.cost}} руб.</td>
             <td>
-                <div class="input-field inline order-position-input">
-                    <form [formGroup]="forms[i]">
-                        <input formControlName="number" type="number"
-                               [ngClass]="{'invalid': forms[i].get('number').invalid && forms[i].get('number').touched}">
-                    </form>
-                    <span class="helper-text red-text"
-                          *ngIf="forms[i].get('number').invalid && forms[i].get('number').touched">
-                        <span *ngIf="forms[i].get('number').errors['required']">Поле не должжно быть пустым</span>
-                        <span *ngIf="forms[i].get('number').errors['pattern']">Число должно быть целым</span>
-                        <span *ngIf="forms[i].get('number').errors['min']">Минимальное значение поля: 1</span>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <button (click)="onSubmit(position, forms[i])" class="btn waves-effect wavers-light btn-small"
+                <button (click)="onSubmit(position)" class="btn waves-effect wavers-light btn-small"
                         type="submit"
-                        [disabled]="forms[i].disabled || forms[i].invalid"
                 >Добавить
                 </button>
             </td>

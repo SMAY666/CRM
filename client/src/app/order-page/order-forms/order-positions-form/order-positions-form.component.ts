@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 import {ActivatedRoute, Params} from '@angular/router';
 import {switchMap} from 'rxjs';
 
@@ -17,7 +17,6 @@ import {OrderPageComponent} from '../../order-page.component';
 export class OrderPositionsFormComponent implements OnInit {
     positions: Position[] = []
     loading = true
-    forms: FormGroup[] = []
 
     constructor(
         private rout: ActivatedRoute,
@@ -37,31 +36,24 @@ export class OrderPositionsFormComponent implements OnInit {
             .subscribe({
                 next: (positions) => {
                     this.positions = positions
-
-                    for (let i = 0; i < this.positions.length; i++) {
-                        this.forms.push(new FormGroup({
-                            number: new FormControl(1, [Validators.required, Validators.min(1), Validators.pattern("^[0-9]*[.,]?")])
-                        }))
-                    }
-
                     this.loading = false
                 },
                 error: error => MaterialService.toast(error.error.message)
             })
     }
 
-    addToList(position: Position, form: FormGroup) {
+    addToList(position: Position) {
         OrderPageComponent.orderPositions.push({
             name: position.name,
-            quantity: form.value.number,
+            quantity: 1,
             cost: position.cost
         })
         console.log(OrderPageComponent.orderPositions)
     }
-    onSubmit(position: Position, form: FormGroup): void {
+    onSubmit(position: Position): void {
         try {
-            this.addToList(position, form)
-            MaterialService.toast(`Позиция "${position.name}" добавлена в список заказаа в количестве ${form.value.number}`)
+            this.addToList(position)
+            MaterialService.toast(`Позиция "${position.name}" добавлена в список заказаа`)
         } catch (error) {
             console.warn(error)
         }
